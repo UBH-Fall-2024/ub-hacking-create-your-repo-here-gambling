@@ -7,7 +7,7 @@ types = ['even','odd']
 options2 = ['ONEto12','THIRTEENto24','TWENTYFIVEto36','ONEto18','NINTEENto36']
 
 def roulette():
-    print("welcome to roulette!")
+    print("welcome to the roulette\u2122!")
     print("your options are as follows:")
     print("your black numbers: ",blackNumbers)
     print("your red numbers: ",redNumbers)
