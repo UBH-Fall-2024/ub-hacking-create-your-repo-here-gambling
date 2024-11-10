@@ -7,7 +7,7 @@ def blackjack():
         consent = (input("would you like to play? (Y/N): ")).upper()
         if consent == "N":
             print("Have a great rest of your day")
-            return None
+            return "Exit"
         elif consent == "Y":
             game = True
             print("here are your cards then.")
