@@ -1,7 +1,7 @@
 import pygame
 from enterence import casino
 from blackjack import blackjack
-from ball import blackNumbers, redNumbers, colors, options, types, options2
+from roulette import roulette, blackNumbers, redNumbers, colors, options, types, options2
 pygame.init()
 
 
