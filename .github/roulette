@@ -1,0 +1,45 @@
+import random
+blackNumbers = ['2','4','6','8','10','11','13','15','17','20','22','24','26','28','29','31','33','35']
+redNumbers = ['1','3','5','7','9','12','14','16','18','19','21','24','25','27','30','32','34','36']
+colors = ['black','red']
+options = ['0','00']
+types = ['even','odd']
+options2 = ['ONEto12','THIRTEENto24','TWENTYFIVEto36','ONEto18','NINTEENto36']
+
+def roulette():
+    print("welcome to the roulette\u2122!")
+    print("your options are as follows:")
+    print("your black numbers: ",blackNumbers)
+    print("your red numbers: ",redNumbers)
+    print("your split options: ",colors)
+    print("your singles options: ",options)
+    print("your number types: ",types)
+    print("and your general options: ",options2)
+    
+
+    def choose_types():
+        decision = ""
+        print("you may now pick your options")
+        choices = input("what is your choice? ")
+        if(choices in blackNumbers):
+            decision = choices
+        elif(choices in redNumbers):
+                decision = choices
+        elif(choices in colors):
+                decision = choices
+        elif(choices in options):
+                decision = choices
+        elif(choices in types):
+                decision = choices
+        elif(choices in options2):
+                decision = choices
+        return decision
+    def randomiser():
+        number = random.randint(1,36)
+        color = random.randint(1,2)
+        if (color == 1):
+            color = 'black'
+        if(color == 2):
+            color = 'red'
+        total = number,color
+        return total
