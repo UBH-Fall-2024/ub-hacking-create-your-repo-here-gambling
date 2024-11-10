@@ -1,0 +1,48 @@
+from blackjack import blackjack
+from roulette import roulette
+
+def casino():
+    print()
+    print("Welcom the the Wonderland CASINO!!\u2122")
+    print("It's a pleasure to be meeting you.")
+    print()
+
+    print("I admit it is a rather small establishment, so we only have two games for you to play.")
+    consent = input("Now then, would you like to play?: (Y/N) ")
+    if (consent.upper()) == "Y":
+        fun_time = True
+        print("very well, right this way")
+    elif (consent.upper()) == "N":
+        fun_time = False
+        print("Very well, have a fantastic rest of your day!")
+        return None
+    
+    while fun_time == True:
+        bj = False
+        roul = False
+        print()
+        print("The games whe have are black jack and a roulette table.")
+        con = input("would either be fine for you, or are you done for the day?: (B/R) ")
+        if con.upper() == "B":
+            print()
+            bj = True
+        elif con.upper() == "R":
+            print()
+            roul = True
+        else:
+            fun_time = False
+            print("Very well, have a fantastic rest of your day!")
+            return None
+        while bj == True:
+            blackjack()
+            print()
+            replay = input("Would you like to play again? (Y/N) ")
+            if replay.upper() != "Y":
+                bj = False
+        while roul == True:
+            roulette()
+            print()
+            replay = input("Would you like to play again? (Y/N) ")
+            if replay.upper() != "Y":
+                roul = False
+casino()
