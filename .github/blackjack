@@ -1,0 +1,154 @@
+from deck_of_cards import deck,pick_a_card
+
+def blackjack():
+    print("welcome to the blackjack table(TM).")
+    game = False
+    while game != True:
+        consent = (input("would you like to play? (Y/N): ")).upper()
+        if consent == "N":
+            print("Have a great rest of your day")
+            return None
+        elif consent == "Y":
+            game = True
+            print("here are your cards then.")
+        else:
+            print("please be clear, your consent is important here")
+    
+    round = 1
+    phand = []
+    dhand = []
+    ptotal = 0
+    dtotal = 0
+    p_string = ""
+    d_string = ""
+    print()
+    while round <= 4:
+        round += 1
+        print()
+        phand, p_string, ptotal, dhand, d_string, dtotal = play_ball(phand, round, deck, dhand, p_string, d_string, dtotal)
+        
+        #round one 21's
+        if round == 2:
+            if ((ptotal == 21) and (dtotal == 21)):
+                print("Now isnt this a rare sight.")
+                print("You had a total of", ptotal, "the dealer had a total of", dtotal)
+                round = 5
+                return("T")
+            elif ((ptotal ==21) and (dtotal != 21)):
+                print("Now look at that, youve got quite the luck.")
+                print("You had a total of", ptotal, "the dealer had a total of", dtotal)
+                round = 5
+                return("W")
+            elif ((ptotal !=21) and (dtotal == 21)):
+                print("Sorry there pall, I'm just lucky.")
+                print("You had a total of", ptotal, "the dealer had a total of", dtotal)
+                round = 5
+                return("L")
+        print()
+        if check(ptotal) == False:
+            print("Sorry, you went over 21")
+            print("You had a total of", ptotal, "the dealer had a total of", dtotal)
+            round = 5
+            return("L")
+        if check(dtotal) == False:
+            print("Congradulations, the dealer went over 21")
+            print("You had a total of", ptotal, "the dealer had a total of", dtotal)
+            round = 5
+            return("W")
+
+        if (round < 4):
+            confermation = (input("Would you like to hit or stand? (H/S): ")).upper()
+            if confermation == "H":
+                continue
+            else:
+                dhand, d_string = dealer_hand(dhand, 4, deck, phand, d_string, dtotal)
+                phand, p_string, ptotal, dhand, d_string, dtotal = play_ball(phand, round, deck, dhand, p_string, d_string, dtotal)
+                if check(dtotal) == False:
+                    print("Congradulations, the dealer went over 21")
+                    print("You had a total of", ptotal, "the dealer had a total of", dtotal)
+                    return("W")
+                round = 5
+    
+    print()
+    print("You had a total of", ptotal, "the dealer had a total of", dtotal)
+    if ptotal == dtotal:
+        print("It's a tie")
+        return("T")
+    if ptotal > dtotal:
+        print("Congradulations, you won")
+        return("W")
+    if ptotal < dtotal:
+        print("House wins")
+        return("L")
+    
+
+
+def total_hand(hand):
+    total = 0
+    aces = 0
+    for card in hand:
+        card_parts = card.split(" ")
+        part = card_parts[0]
+        if (part[0] == "K") or (part[0] == "Q") or (part[0] == "J"):
+            total += 10
+        elif part[0] == "A":
+            total += 11
+            aces += 1
+        else:
+            total += int(part)
+    while ((total > 21) and (aces > 0)):
+        total -= 10
+        aces -= 1
+    return total
+
+def player_hand(phand, round, deck, dhand, p_string):
+    hand = phand
+    ret_str = p_string
+    for space in range((round-len(phand))):
+        possible = pick_a_card(deck)
+        while (possible in phand) or (possible in dhand):
+            possible = pick_a_card(deck)
+        hand.append(possible)
+
+        if len(ret_str) == 0:
+            ret_str += ("the " + possible)
+        else:
+            ret_str += (" and the " + possible)
+    return hand, ret_str
+
+
+
+def dealer_hand(dhand, round, deck, phand, d_string, dtotal):
+    hand = dhand
+    ret_str = d_string
+    for space in range((round-len(dhand))):
+        if dtotal <= 16:
+            possible = pick_a_card(deck)
+            while (possible in phand) or (possible in dhand):
+                possible = pick_a_card(deck)
+            hand.append(possible)
+            if len(ret_str) == 0:
+                ret_str += ("a face down card")
+            else:
+                ret_str += (" and the " + possible)
+        dtotal = total_hand(hand)
+    return hand, ret_str
+
+def play_ball(phand, round, deck, dhand, p_string, d_string, dtotal):
+    phand, p_string = player_hand(phand, round, deck, dhand, p_string)
+    ptotal = total_hand(phand)
+    print("Your hand is", p_string)
+    print("your current total is", ptotal)
+
+    dhand, d_string= dealer_hand(dhand, round, deck, phand, d_string, dtotal)
+    dtotal = total_hand(dhand)
+    print("")
+    print("The dealer has", d_string)
+
+    return (phand, p_string, ptotal, dhand, d_string, dtotal)
+
+def check(total):
+    if total > 21:
+        return False
+    else:
+        return True
