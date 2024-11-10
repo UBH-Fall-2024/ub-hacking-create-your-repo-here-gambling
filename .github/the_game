@@ -1,9 +1,11 @@
 import pygame
 from enterence import casino
+from blackjack import blackjack
+from ball import blackNumbers, redNumbers, colors, options, types, options2
 pygame.init()
 
 
-size = (600, 600)
+size = (725, 700)
 floor = pygame.Rect(100, 550, 200, 10)
 ball = pygame.Rect(50, 250, 10, 10)
 font = pygame.font.SysFont('arial', 25)
@@ -66,6 +68,49 @@ while continueGame:
         screen.blit(text, (50,240))
         text = font.render("(First letter of Blackjack, Roulette, or Exit)", 1, WHITE)
         screen.blit(text, (80,270))
+
+        if key[pygame.K_b] == True:
+            playing = False
+            cards = True
+        elif key[pygame.K_r] == True:
+            playing = False
+            table = True
+        elif key[pygame.K_e] == True:
+            playing = False
+            leaving = True
+    
+    if cards == True:
+        text = font.render("(This is where the blackjack table is)", 1, WHITE)
+        screen.blit(text, (45,195))
+
+    
+    if table == True:
+        r_intro = True
+        if r_intro == True:
+            text = font.render("welcome to roulette!\u2122", 1, WHITE)
+            screen.blit(text, (20,100))
+            text = font.render("your options are as follows:", 1, WHITE)
+            screen.blit(text, (20,125))
+            text = font.render(("your black numbers: "), 1, WHITE)
+            screen.blit(text, (20,175))
+            text = font.render((str(blackNumbers)), 1, WHITE)
+            screen.blit(text, (00,200))
+            text = font.render(("your red numbers: "), 1, WHITE)
+            screen.blit(text, (20,250))
+            text = font.render((str(redNumbers)), 1, RED)
+            screen.blit(text, (00,275))
+            text = font.render(("your split options: " + str(colors)), 1, WHITE)
+            screen.blit(text, (20,325))
+            text = font.render(("your singles options: " + str(options)), 1, GREEN)
+            screen.blit(text, (20,375))
+            text = font.render(("your number types: " + str(types)), 1, WHITE)
+            screen.blit(text, (20,425))
+            text = font.render(("and your general options: "), 1, WHITE)
+            screen.blit(text, (20,475))
+            text = font.render((str(options2)), 1, WHITE)
+            screen.blit(text, (20,500))
+            text = font.render(("What would you like to bet on?"), 1, YELLOW)
+            screen.blit(text, (40,550))
 
 
     pygame.time.wait(1)
