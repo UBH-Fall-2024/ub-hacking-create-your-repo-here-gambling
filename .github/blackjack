@@ -1,7 +1,7 @@
 from deck_of_cards import deck,pick_a_card
 
 def blackjack():
-    print("welcome to the blackjack table(TM).")
+    print("welcome to the blackjack table\u2122.")
     game = False
     while game != True:
         consent = (input("would you like to play? (Y/N): ")).upper()
