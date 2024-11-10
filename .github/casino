@@ -1,9 +1,10 @@
 from blackjack import blackjack
 from roulette import roulette
 
+
 def casino():
     print()
-    print("Welcom the the Wonderland CASINO!!\u2122")
+    print("Welcome the the Wonderland CASINO!!\u2122")
     print("It's a pleasure to be meeting you.")
     print()
 
@@ -45,4 +46,3 @@ def casino():
             replay = input("Would you like to play again? (Y/N) ")
             if replay.upper() != "Y":
                 roul = False
-casino()
