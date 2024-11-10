@@ -1,1 +1,37 @@
-#good luck
+import pygame
+from enterence import casino
+pygame.init()
+
+
+size = (600, 600)
+floor = pygame.Rect(100, 550, 200, 10)
+ball = pygame.Rect(50, 250, 10, 10)
+font = pygame.font.SysFont('arial', 25)
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption('Py-Brickbreaker')
+
+
+GREEN = (28, 252, 106)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+PINK = (252, 3, 152)
+ORANGE = (255, 180, 28)
+RED = (255, 0, 0)
+YELLOW = (255,255,0)
+
+
+continueGame = True
+while continueGame:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            continueGame = False
+    screen.fill(BLACK)
+    key = pygame.key.get_pressed()
+    text = font.render('Wonderland Casino!', 1, YELLOW)
+    screen.blit(text, (200, 10))
+
+    text = font.render("Welcome the the Wonderland CASINO!!\u2122", 1, WHITE)
+    screen.blit(text, (100,250))
+
+    pygame.time.wait(1)
+    pygame.display.flip()
